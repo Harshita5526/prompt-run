@@ -1118,3 +1118,567 @@ textarea:focus-visible,
     transition-duration: 0.01ms !important;
   }
 }
+   /*change*/
+   
+/* =========================================
+   AFTER/MONEY — AFTER10-inspired polish
+   Add this at the END of App.css
+========================================= */
+
+:root {
+  --am-glow: rgba(174, 120, 255, 0.22);
+  --am-glow-soft: rgba(174, 120, 255, 0.09);
+}
+
+/* Richer background atmosphere */
+.app-shell {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(
+      ellipse at 10% 12%,
+      rgba(115, 65, 190, 0.12),
+      transparent 38%
+    ),
+    radial-gradient(
+      ellipse at 92% 75%,
+      rgba(91, 47, 156, 0.10),
+      transparent 35%
+    ),
+    var(--bg);
+}
+
+.main-content {
+  position: relative;
+  background:
+    radial-gradient(
+      ellipse at 80% 0%,
+      rgba(160, 111, 255, 0.075),
+      transparent 35%
+    );
+}
+
+/* Smoother page transitions */
+.content-wrap {
+  animation: am-page-enter 550ms cubic-bezier(.2, .7, .25, 1) both;
+}
+
+.page-stack {
+  gap: 26px;
+}
+
+@keyframes am-page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Premium glass surfaces */
+.panel,
+.stat-card,
+.goal-card,
+.scenario-card {
+  position: relative;
+  isolation: isolate;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.panel {
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(168, 120, 255, 0.055),
+      transparent 42%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(35, 27, 53, 0.97),
+      rgba(23, 18, 36, 0.98)
+    );
+}
+
+/* Fine highlight on the top edge */
+.panel::before,
+.goal-card::before,
+.scenario-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 12% auto;
+  height: 1px;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(220, 196, 255, 0.32),
+    transparent
+  );
+  opacity: 0.65;
+}
+
+/* Better card hover response */
+@media (hover: hover) and (pointer: fine) {
+  .panel:hover {
+    transform: translateY(-2px);
+    border-color: rgba(197, 162, 255, 0.30);
+    box-shadow:
+      0 16px 38px rgba(0, 0, 0, 0.20),
+      0 0 26px rgba(128, 79, 210, 0.055);
+  }
+
+  .stat-card:hover,
+  .goal-card:hover,
+  .scenario-card:hover {
+    border-color: rgba(205, 174, 255, 0.48);
+  }
+}
+
+/* Hero: more depth and richer purple glow */
+.hero-card {
+  background-size: 180% 180%;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.055),
+    0 18px 55px rgba(0, 0, 0, 0.15),
+    0 0 35px rgba(120, 70, 190, 0.055);
+}
+
+.hero-card::after {
+  animation: am-glow-drift 11s ease-in-out infinite alternate;
+}
+
+@keyframes am-glow-drift {
+  from {
+    transform: translate3d(-12px, 0, 0) scale(0.92);
+    opacity: 0.55;
+  }
+  to {
+    transform: translate3d(18px, 14px, 0) scale(1.12);
+    opacity: 1;
+  }
+}
+
+/* Hero title polish */
+.hero-copy h2 {
+  text-shadow: 0 3px 30px rgba(186, 144, 255, 0.08);
+}
+
+.hero-copy h2 em {
+  background-size: 200% auto;
+  animation: am-title-shimmer 7s ease-in-out infinite alternate;
+}
+
+@keyframes am-title-shimmer {
+  from { background-position: 0% center; }
+  to { background-position: 100% center; }
+}
+
+/* Floating artwork */
+.orbit-art {
+  filter: drop-shadow(0 0 22px rgba(166, 112, 255, 0.10));
+}
+
+.orbit,
+.orbit-two {
+  transform-origin: center;
+}
+
+.orbit {
+  animation: am-orbit-rotate 24s linear infinite;
+}
+
+.orbit-two {
+  animation: am-orbit-rotate 30s linear infinite reverse;
+}
+
+@keyframes am-orbit-rotate {
+  from { rotate: 0deg; }
+  to { rotate: 360deg; }
+}
+
+/* Golden coins: warmer reflections */
+.coin {
+  box-shadow:
+    inset 0 1px 2px rgba(255, 255, 255, 0.4),
+    0 8px 28px rgba(0, 0, 0, 0.32),
+    0 0 22px rgba(223, 174, 105, 0.08);
+}
+
+/* Stat numbers stand out */
+.stats-grid .stat-card h3 {
+  color: #faf7ff;
+  letter-spacing: -1px;
+  line-height: 1.25;
+}
+
+.stat-card-icon,
+.stat-icon {
+  transition:
+    transform 250ms ease,
+    box-shadow 250ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .stat-card:hover .stat-card-icon,
+  .stat-card:hover .stat-icon {
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 0 25px rgba(165, 139, 255, 0.22);
+  }
+}
+
+/* Chart bars: smoother reveal and hover */
+.bar {
+  animation: am-bar-enter 750ms cubic-bezier(.2, .7, .2, 1) both;
+}
+
+@keyframes am-bar-enter {
+  from {
+    transform: scaleY(0.04);
+    opacity: 0.15;
+  }
+  to {
+    transform: scaleY(1);
+    opacity: 0.82;
+  }
+}
+
+/* Financial health ring */
+.health-ring {
+  position: relative;
+  box-shadow: 0 0 28px rgba(171, 129, 255, 0.08);
+  transition: filter 250ms ease;
+}
+
+.health-ring > div {
+  box-shadow: inset 0 0 16px rgba(0, 0, 0, 0.12);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .health-ring:hover {
+    filter: drop-shadow(0 0 10px rgba(183, 150, 255, 0.24));
+  }
+}
+
+/* Transaction rows */
+.transaction-row {
+  position: relative;
+}
+
+.transaction-symbol {
+  transition:
+    transform 220ms ease,
+    border-color 220ms ease,
+    background 220ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .transaction-row:hover .transaction-symbol {
+    transform: scale(1.055);
+    border-color: rgba(197, 162, 255, 0.38);
+  }
+}
+
+/* Buttons: clearer interactive feedback */
+.primary-btn,
+.secondary-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.primary-btn:focus-visible,
+.secondary-btn:focus-visible {
+  outline: 2px solid #e0ccff;
+  outline-offset: 3px;
+}
+
+.primary-btn:disabled,
+.secondary-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Progress bars */
+.progress-track span,
+.goal-progress span {
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-track span::after,
+.goal-progress span::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.24) 48%,
+    transparent 75%
+  );
+  transform: translateX(-100%);
+  animation: am-progress-shine 4s ease-in-out infinite;
+}
+
+@keyframes am-progress-shine {
+  0%, 65% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Toast entrance */
+.toast {
+  animation: am-toast-enter 300ms cubic-bezier(.2, .7, .2, 1) both;
+  border-color: rgba(197, 162, 255, 0.25);
+  background:
+    linear-gradient(135deg, rgba(49, 36, 72, 0.98), rgba(30, 23, 45, 0.98));
+  backdrop-filter: blur(18px);
+}
+
+@keyframes am-toast-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Subtle scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #51416c #171326;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #171326;
+}
+
+*::-webkit-scrollbar-thumb {
+  border: 2px solid #171326;
+  border-radius: 20px;
+  background: #51416c;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #8064aa;
+}
+
+/* Small screens */
+@media (max-width: 760px) {
+  .hero-card {
+    background-size: auto;
+  }
+
+  .panel,
+  .stat-card,
+  .goal-card,
+  .scenario-card {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .hero-card,
+  .panel,
+  .stat-card {
+    border-radius: 16px;
+  }
+}
+
+/* Respect accessibility settings */
+@media (prefers-reduced-motion: reduce) {
+  .content-wrap,
+  .hero-card,
+  .hero-card::before,
+  .hero-card::after,
+  .hero-copy h2 em,
+  .orbit,
+  .orbit-two,
+  .bar,
+  .toast,
+  .progress-track span::after,
+  .goal-progress span::after {
+    animation: none !important;
+  }
+}
+ /* ==========================================
+   GLOBAL PREMIUM CARD HOVER
+   All pages + all main cards
+   ========================================== */
+
+/* Common card styles */
+.panel,
+.stat-card,
+.hero-card,
+.transaction-item,
+.goal-card,
+.goal-add-card,
+.goal-summary,
+.commitment-banner,
+.commitment-row,
+.chart-card,
+.health-card,
+.forecast-card,
+.summary-card,
+.bottom-card,
+.tip-strip,
+.table-panel,
+.page-stack > section:not(.page-intro),
+.page-stack > .goal-grid > .goal-card,
+.page-stack > .goal-grid > .goal-add-card {
+  position: relative;
+  transition:
+    transform 0.32s ease,
+    box-shadow 0.32s ease,
+    border-color 0.32s ease,
+    background-color 0.32s ease;
+}
+
+/* Glow behind cards */
+.panel::after,
+.stat-card::after,
+.hero-card::after,
+.transaction-item::after,
+.goal-card::after,
+.goal-add-card::after,
+.goal-summary::after,
+.commitment-banner::after,
+.commitment-row::after,
+.chart-card::after,
+.health-card::after,
+.forecast-card::after,
+.summary-card::after,
+.bottom-card::after,
+.tip-strip::after,
+.table-panel::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    rgba(168, 85, 247, 0.8),
+    rgba(99, 102, 241, 0.6),
+    rgba(217, 70, 239, 0.7)
+  );
+  filter: blur(15px);
+  opacity: 0;
+  z-index: -1;
+  pointer-events: none;
+  transition: opacity 0.32s ease;
+}
+
+/* Strong hover */
+.panel:hover,
+.stat-card:hover,
+.hero-card:hover,
+.transaction-item:hover,
+.goal-card:hover,
+.goal-add-card:hover,
+.goal-summary:hover,
+.commitment-banner:hover,
+.commitment-row:hover,
+.chart-card:hover,
+.health-card:hover,
+.forecast-card:hover,
+.summary-card:hover,
+.bottom-card:hover,
+.tip-strip:hover,
+.table-panel:hover,
+.page-stack > section:not(.page-intro):hover {
+ 
+transform: translateY(-4px) scale(1.008);
+border-color: rgba(192, 132, 252, 0.7) !important;
+box-shadow:
+  0 10px 24px rgba(0, 0, 0, 0.28),
+  0 0 16px rgba(168, 85, 247, 0.32),
+  0 0 30px rgba(139, 92, 246, 0.16) !important;
+z-index: 5;
+
+}
+
+/* Show the purple glow */
+.panel:hover::after,
+.stat-card:hover::after,
+.hero-card:hover::after,
+.transaction-item:hover::after,
+.goal-card:hover::after,
+.goal-add-card:hover::after,
+.goal-summary:hover::after,
+.commitment-banner:hover::after,
+.commitment-row:hover::after,
+.chart-card:hover::after,
+.health-card:hover::after,
+.forecast-card:hover::after,
+.summary-card:hover::after,
+.bottom-card:hover::after,
+.tip-strip:hover::after,
+.table-panel:hover::after {
+  opacity: 0.5;
+}
+
+/* Buttons */
+.primary-btn:hover,
+button:hover,
+.btn:hover {
+  box-shadow:
+    0 7px 22px rgba(139, 92, 246, 0.4),
+    0 0 20px rgba(168, 85, 247, 0.25);
+  filter: brightness(1.08);
+}
+
+/* Keep hover smooth on smaller screens */
+@media (max-width: 768px) {
+  .panel:hover,
+  .stat-card:hover,
+  .hero-card:hover,
+  .transaction-item:hover,
+  .goal-card:hover,
+  .goal-add-card:hover,
+  .goal-summary:hover,
+  .commitment-banner:hover,
+  .commitment-row:hover,
+  .chart-card:hover,
+  .health-card:hover,
+  .forecast-card:hover,
+  .summary-card:hover,
+  .bottom-card:hover,
+  .tip-strip:hover,
+  .table-panel:hover,
+  .page-stack > section:not(.page-intro):hover {
+    transform: translateY(-3px);
+  }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .panel,
+  .stat-card,
+  .hero-card,
+  .transaction-item,
+  .goal-card,
+  .goal-add-card,
+  .goal-summary,
+  .commitment-banner,
+  .commitment-row,
+  .chart-card,
+  .health-card,
+  .forecast-card,
+  .summary-card,
+  .bottom-card,
+  .tip-strip,
+  .table-panel {
+    transition: none !important;
+  }
+}
+ 
